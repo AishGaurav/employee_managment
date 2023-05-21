@@ -1,0 +1,150 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/font-awesome/scss/font-awesome.scss";
+@import "./assets/branding.scss";
+
+html {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: arial, sans-serif;
+}
+
+.svg-icon {
+  color: #{$primary-color};
+}
+
+.svg-light-icon {
+  color: #{$light-grey};
+}
+
+.text-green {
+  color: #{$primary-color};
+}
+
+/* When the checkbox is checked, add a #{$primary-color} background */
+// input[type=checkbox]:checked~.checkmark {
+//   background-color: #{$primary-color};
+// }
+
+// ____________________________ START _______________________________________
+.checkbox {
+  input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: #{$primary-color};
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid #{$primary-color};
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+  }
+
+  input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #{$primary-color};
+  }
+
+  input[type="checkbox"]::before {
+    /* ...existing styles */
+
+    /* Windows High Contrast Mode */
+    background-color: red;
+  }
+
+  input[type="checkbox"] {
+    /* ...existing styles */
+    display: grid;
+    place-content: center;
+  }
+
+  input[type="checkbox"]::before {
+    /* ...existing styles */
+
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  input[type="checkbox"]:focus {
+    outline: max(2px, 0.15em) solid red;
+    outline-offset: max(2px, 0.15em);
+  }
+
+  input[type="checkbox"]:disabled {
+    --form-control-color: #959495;
+    color: #959495;
+    cursor: not-allowed;
+  }
+
+  input[type="checkbox"]:disabled {
+    color: #959495;
+    cursor: not-allowed;
+  }
+}
+
+// ____________________________ END _______________________________________
+
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 95px;
+}
+
+.btn:hover {
+  //background: #0055dd;
+  //color: #fff;
+  transition: 0.5s;
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 5px rgba(0, 85, 255, 0.5)
+}
+
+
+.btn-primary {
+  background-color: #{$primary-color};
+  color: #FFF;
+}
+
+.btn-secondry {
+  background-color: #fff;
+  border: 1px solid #{$primary-color};
+  color: #{$primary-color};
+}

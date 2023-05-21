@@ -1,0 +1,168 @@
+<!-- <div class="wrapper"> -->
+<div [ngClass]="{'wrapper': isSearchMenu == false, 'wrapper2': isSearchMenu == true}">
+  <section class="menu">
+    <div class="logo-container">
+      <img src="{{IMAGE_PATH}}/InfrrdLogo_dark.svg" alt="logo" class="logo" />
+      <ul class="nav-list text-green" *ngFor="let i of APP_CONSTANTS['NAVIGATION_LIST']">
+        <!-- <i class="fa-regular fa-magnifying-glass"></i> -->
+        <fa-icon [icon]=i.icon class="svg-icon"></fa-icon>
+        <li (click)="onNavMenuClick(i)">{{ i.displayName }}</li>
+      </ul>
+    </div>
+
+    <div class="logo-container">
+      <ul class="nav-list text-green">
+        <i class="fa fa-comments svg-icon"></i>
+        <li>Get Help</li>
+      </ul>
+      <ul class="nav-list text-green">
+        <fa-icon [icon]=ICONS.faSignOut class="svg-icon"></fa-icon>
+        <li>Sign Out</li>
+      </ul>
+    </div>
+
+    <!-- <div class="logo-container">
+      <ul class="nav-list text-green">
+        <li>
+          <span><fa-icon [icon]=ICONS.faHandsHelping class="svg-icon"></fa-icon></span>Get Help
+        </li>
+        <li>
+          <span><fa-icon [icon]=ICONS.faSignOut class="svg-icon"></fa-icon></span>Sign Out
+        </li>
+      </ul>
+    </div> -->
+
+  </section>
+
+  <ng-template [ngIf]="isSearchMenu">
+    <section class="side-search-filter">
+      <div>
+        <div class="filter-container">
+          <div style="color: #68666b; font-size: 13px; margin: 0.5em;">Department</div>
+          <!-- (change)="onDepartmentChange()" -->
+          <select name="teams" id="teams" class="filter-select" [(ngModel)]="selectedDepartment"
+            placeholder="Choose Department">
+            <ng-template ngFor let-index="index" let-c="count" let-i [ngForOf]="APP_CONSTANTS['DEPARTMENTS']">
+              <option value="{{i.value}}">{{ i.name }}</option>
+            </ng-template>
+          </select>
+        </div>
+
+        <div class="filter-container">
+          <div style="color: #68666b; font-size: 13px; margin: 0.5em;">Location</div>
+          <!-- (change)="onLocationChange(selectedLocation)" -->
+          <select name="teams" id="teams" class="filter-select" [(ngModel)]="selectedLocation">
+            <option value="null" *ngIf="selectedLocation == null">Choose Location</option>
+            <ng-template ngFor let-index="index" let-c="count" let-i [ngForOf]="APP_CONSTANTS['LOCATIONS']">
+              <option value="{{i.value}}">{{ i.name }}</option>
+            </ng-template>
+          </select>
+        </div>
+
+        <div class="filter-container">
+          <div style="color: #68666b; font-size: 13px; margin: 0.5em;">Year of Joining</div>
+          <!-- (change)="onLocationChange(selectedLocation)" -->
+          <select name="teams" id="teams" class="filter-select" [(ngModel)]="selectedYear">
+            <option value="null" *ngIf="selectedLocation == null">Choose Location</option>
+            <ng-template ngFor let-index="index" let-c="count" let-i [ngForOf]="APP_CONSTANTS['YEARS']">
+              <option value="{{i.value}}">{{ i.name }}</option>
+            </ng-template>
+          </select>
+        </div>
+      </div>
+
+      <div class="search-button-container">
+        <i class="fa fa-chevron-left svg-light-icon" style="cursor: pointer;" title="Collapse"
+          (click)="collapseSearchMenu()"></i>
+        <div class="filter-button">
+          <button class="btn btn-secondry" (click)="resetFilters()">Cancel</button>
+          <button class="btn btn-primary" (click)="applyFilters()">Submit</button>
+        </div>
+      </div>
+    </section>
+  </ng-template>
+
+  <section>
+    <header class="header">
+      <div class="header-contents">
+        <span><fa-icon [icon]=ICONS.faBell class="svg-light-icon"></fa-icon></span>
+        <span>
+          <select name="teams" id="teams" [(ngModel)]="selectedTeam" (change)="onTeamChange()"
+            placeholder="Choose Team">
+            <option value="null" *ngIf="selectedTeam == null">Choose Team</option>
+            <ng-template ngFor let-index="index" let-c="count" let-i [ngForOf]="APP_CONSTANTS['TEAMS_LIST']">
+              <option value="{{i.value}}">{{ i.name }}</option>
+            </ng-template>
+          </select>
+        </span>
+      </div>
+    </header>
+    <div class="data-wrapper">
+      <section class="summary">
+        <span>{{totalCount}} Results Found</span>
+        <span style="float: right;">
+          <input type="checkbox" [(ngModel)]="isBangaloreEmployee" (change)="getBangaloreEmployee()" />
+          Show only {{ defaultLocation }} Employees
+        </span>
+      </section>
+      <section class="data-container">
+        <!-- <ng-template *ngFor="let i of EMPLOYEES; index as imdex; count as count;"> -->
+        <ng-template ngFor let-index="index" let-c="count" let-i [ngForOf]="employeeData">
+          <!-- <div class="card-container">
+            <pre>{{i | json}}</pre>
+          </div> -->
+          <div class="card-container">
+            <section class="card-header">
+              <div>
+                <img src="{{IMAGE_PATH}}/img_avatar.png" alt="Avatar" class="avatar">
+              </div>
+              <div style="display: flex; flex-direction: column;">
+                <label style="font-size: 15px;font-weight: 600;">{{i.name}}</label>
+                <label style="color: #68666b;font-weight: 500;">{{i.designation}}</label>
+              </div>
+              <div class="msg"><i class="fa fa-telegram"></i></div>
+            </section>
+            <section class="card-rating data-heading-text">
+              <label>{{i.rating}} Rating</label>
+              <span style="margin-left: 1em;">
+                <ng-template ngFor let-index="index" let-c="count" let-i [ngForOf]="[1,2,3,4,5]">
+                  <i class="fa fa-star star-checked"></i>
+                </ng-template>
+              </span>
+            </section>
+            <section class="card-content">
+              <div class="content-cell">
+                <span>
+                  <span class="data-heading-text">Experience: </span>
+                  <span>{{i.experience}}</span>
+                </span>
+                <span style="float: right;">
+                  <span class="data-heading-text">Date of Joining:
+                  </span><span>{{i.yoj}}</span>
+                </span>
+              </div>
+              <div class="content-cell">
+                <span class="content-text-decoration">
+                  <span class="data-heading-text">Current Team: </span>
+                  <span>{{i.currentTeam}} {{i.currentLocation}}</span>
+                </span>
+              </div>
+              <div class="content-cell">
+                <span class="content-text-decoration">
+                  <span class="data-heading-text">Reporting Manager: </span>
+                  <span>{{i.reportingManager}}</span>
+                </span>
+              </div>
+            </section>
+            <section class="card-footer">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span><i class="fa fa-phone contact-icon"></i> {{i.contactNo}}</span>
+                <span><i class="fa fa-envelope mail-icon"></i> {{i.emailId}}</span>
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </section>
+    </div>
+  </section>
+</div>
