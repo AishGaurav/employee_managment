@@ -9,6 +9,7 @@ import { APP_CONSTANTS } from './constants/app-constants';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent implements OnInit {
   constructor(
     private readonly fetchDataService: FetchDataService,
