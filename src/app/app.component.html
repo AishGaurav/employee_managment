@@ -20,18 +20,6 @@
         <li>Sign Out</li>
       </ul>
     </div>
-
-    <!-- <div class="logo-container">
-      <ul class="nav-list text-green">
-        <li>
-          <span><fa-icon [icon]=ICONS.faHandsHelping class="svg-icon"></fa-icon></span>Get Help
-        </li>
-        <li>
-          <span><fa-icon [icon]=ICONS.faSignOut class="svg-icon"></fa-icon></span>Sign Out
-        </li>
-      </ul>
-    </div> -->
-
   </section>
 
   <ng-template [ngIf]="isSearchMenu">
@@ -157,7 +145,7 @@
             <section class="card-footer">
               <div style="display: flex; justify-content: space-between; align-items: center;">
                 <span><i class="fa fa-phone contact-icon"></i> {{i.contactNo}}</span>
-                <span><i class="fa fa-envelope mail-icon"></i> {{i.emailId}}</span>
+                <span><i class="fa fa-envelope mail-icon"></i> {{i.emailId | lowercase}}</span>
               </div>
             </section>
           </div>
